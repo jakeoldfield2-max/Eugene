@@ -1,0 +1,337 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 50%, #228B22 50%, #228B22 75%, #8B4513 75%, #8B4513 100%);
+}
+
+.garden-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sky Section */
+.sky {
+    position: relative;
+    height: 50vh;
+    background: #87CEEB;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 5vh;
+}
+
+.seed-button {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.seed-button:hover {
+    transform: scale(1.1);
+}
+
+.seed {
+    width: 20px;
+    height: 20px;
+    background: #8B4513;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Ground Section */
+.ground {
+    position: relative;
+    height: 50vh;
+}
+
+.grass-surface {
+    height: 25vh;
+    background: #228B22;
+    position: relative;
+}
+
+.grass-surface::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 2px,
+        #32CD32 2px,
+        #32CD32 4px
+    );
+}
+
+.earth {
+    height: 25vh;
+    background: #8B4513;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Root System */
+.root-system {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+}
+
+.root {
+    position: absolute;
+    background: #F5F5DC;
+    border-radius: 2px;
+    transform-origin: top center;
+    opacity: 0;
+}
+
+/* Plant Container */
+.plant-container {
+    position: absolute;
+    bottom: 50vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.stem {
+    width: 6px;
+    background: linear-gradient(to top, #228B22, #32CD32);
+    border-radius: 3px;
+    transform-origin: bottom center;
+    height: 0;
+    transition: height 2s ease-in-out;
+}
+
+.flower-cluster {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 1.5s ease-in-out;
+}
+
+.flower {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.flower:hover {
+    transform: scale(1.2);
+}
+
+.flower:nth-child(1) .petal { background: #FFB6C1; }
+.flower:nth-child(2) .petal { background: #DDA0DD; }
+.flower:nth-child(3) .petal { background: #F0F8FF; }
+.flower:nth-child(4) .petal { background: #FFEFD5; }
+
+.petal {
+    position: absolute;
+    width: 12px;
+    height: 20px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform-origin: center bottom;
+}
+
+.petal-1 {
+    top: -5px;
+    left: 6px;
+    transform: rotate(0deg);
+}
+
+.petal-2 {
+    top: 2px;
+    left: 13px;
+    transform: rotate(90deg);
+}
+
+.petal-3 {
+    top: 10px;
+    left: 6px;
+    transform: rotate(180deg);
+}
+
+.petal-4 {
+    top: 2px;
+    left: -1px;
+    transform: rotate(270deg);
+}
+
+.flower-center {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+    background: #FFD700;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Seed Landing Spot */
+.seed-landing-spot {
+    position: absolute;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    z-index: 1;
+}
+
+/* Zoom Overlay */
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    z-index: 100;
+}
+
+.zoom-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.zoom-content {
+    position: relative;
+    max-width: 80vw;
+    max-height: 80vh;
+}
+
+.flower-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.back-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+/* Animation Classes */
+.seed-falling {
+    animation: seedDrop 2s ease-in forwards;
+}
+
+@keyframes seedDrop {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(45vh);
+    }
+}
+
+.root-growing {
+    animation: rootGrowth 0.8s ease-out forwards;
+}
+
+@keyframes rootGrowth {
+    0% {
+        opacity: 0;
+        height: 0;
+    }
+    100% {
+        opacity: 0.8;
+        height: var(--root-length);
+    }
+}
+
+.stem-growing {
+    height: 30vh;
+}
+
+.flowers-blooming {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .seed {
+        width: 25px;
+        height: 25px;
+    }
+
+    .flower {
+        width: 30px;
+        height: 30px;
+    }
+
+    .flower-cluster {
+        gap: 20px;
+    }
+
+    .stem-growing {
+        height: 25vh;
+    }
+
+    .zoom-content {
+        max-width: 90vw;
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .flower-cluster {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stem-growing {
+        height: 20vh;
+    }
+}

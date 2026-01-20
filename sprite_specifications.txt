@@ -1,0 +1,156 @@
+SWEETPEA GARDEN PIXEL ART SPRITE SPECIFICATIONS
+==============================================
+
+OVERVIEW
+--------
+This document contains detailed specifications for all pixel art assets created for the Interactive Sweetpea Garden HTML5 canvas scene. All sprites are designed in a clean, minimalist pixel art style with limited color palettes suitable for canvas-based rendering and animation.
+
+ASSET INVENTORY
+--------------
+
+1. SKY BACKGROUND TILE
+   - File: sky_tile.svg
+   - Dimensions: 32x32 pixels
+   - Colors: Light blue gradient (#B0E0E6 to #87CEEB)
+   - Usage: Tileable background for sky layer
+   - Implementation: Tile horizontally and vertically to fill canvas sky area
+
+2. GRASS LAYER TILE
+   - File: grass_tile.svg
+   - Dimensions: 32x16 pixels
+   - Colors: Base green (#228B22), Light green (#32CD32), Dark green (#006400, #1F7A1F)
+   - Features: Individual grass blade details with varied heights
+   - Usage: Horizontal ground layer with grass texture
+   - Implementation: Tile horizontally across ground level
+
+3. SOIL/EARTH LAYER TILE
+   - File: soil_tile.svg
+   - Dimensions: 32x32 pixels
+   - Colors: Base brown (#8B4513), Dark brown (#654321), Light brown (#A0522D), Sandy particles (#D2691E)
+   - Features: Rich soil texture with particles and depth variations
+   - Usage: Underground/soil layer beneath grass
+   - Implementation: Tile to create underground soil areas
+
+4. SEED SPRITE
+   - File: seed.svg
+   - Dimensions: 8x8 pixels
+   - Colors: Brown (#8B4513), Dark brown (#654321), Light brown (#A0522D)
+   - Features: Small oval seed with 3D shading
+   - Usage: Initial plant state, can be planted in soil
+   - Implementation: Position at planting locations
+
+5. ROOT SYSTEM COMPONENTS
+   - Files: root_main.svg, root_branch_left.svg, root_branch_right.svg, root_small.svg
+   - Colors: Beige (#F5F5DC), White highlights (#FFFFFF)
+   - Features: Modular root segments for procedural generation
+
+   a) Main Root (root_main.svg): 16x16 pixels, vertical main root
+   b) Left Branch (root_branch_left.svg): 12x8 pixels, angled left branch
+   c) Right Branch (root_branch_right.svg): 12x8 pixels, angled right branch
+   d) Small Root (root_small.svg): 8x4 pixels, thin horizontal tendril
+
+   Usage: Combine components to create dynamic root systems
+   Implementation: Place main root vertically, attach branches at various points
+
+6. PLANT STEM TILE
+   - File: stem_tile.svg
+   - Dimensions: 8x16 pixels
+   - Colors: Green stem (#228B22), Light green highlight (#32CD32), Dark green shadow (#006400)
+   - Features: Vertical stem with small leaf nodes, tileable
+   - Usage: Plant growth between soil and flowers
+   - Implementation: Stack vertically to create stems of varying heights
+
+7. SWEETPEA FLOWERS (Set of 4)
+   - Dimensions: 16x16 pixels each
+   - Colors: Golden center (#FFD700) for all variants
+   - Features: Simple 4-petal design with highlights and shadows
+
+   a) Pink Flower (flower_pink.svg):
+      - Petals: Light pink (#FFB6C1), Medium pink (#FF69B4), Very light pink (#FFC0CB)
+      - Shadow: Deep pink (#FF1493)
+
+   b) Purple Flower (flower_purple.svg):
+      - Petals: Light purple (#DDA0DD), Medium purple (#9370DB), Very light purple (#E6E6FA)
+      - Shadow: Dark purple (#6A5ACD)
+
+   c) White Flower (flower_white.svg):
+      - Petals: Off-white (#F5F5F5), Pure white (#FFFFFF)
+      - Shadow: Light gray (#E0E0E0)
+
+   d) Beige Flower (flower_beige.svg):
+      - Petals: Beige (#F5F5DC), Light khaki (#F0E68C), Cream (#FFFACD)
+      - Shadow: Darker beige (#DDD8A0)
+
+   Usage: End-stage plant growth, decorative elements
+   Implementation: Place at top of grown stems, randomize colors for variety
+
+8. UI BACK BUTTON
+   - File: ui_back_button.svg
+   - Dimensions: 16x16 pixels
+   - Colors: Gray button (#D3D3D3, #F0F0F0), Dark gray border (#A0A0A0, #808080), Dark arrow (#404040)
+   - Features: 3D button effect with left-pointing arrow
+   - Usage: Navigation/UI element
+   - Implementation: Position in corner or UI area
+
+TECHNICAL SPECIFICATIONS
+------------------------
+
+Color Palette Summary:
+- Sky: #B0E0E6, #87CEEB
+- Grass: #228B22, #32CD32, #006400, #1F7A1F
+- Soil: #8B4513, #654321, #A0522D, #D2691E
+- Seeds: #8B4513, #654321, #A0522D
+- Roots: #F5F5DC, #FFFFFF
+- Stems: #228B22, #32CD32, #006400
+- Flowers: Various (see individual specifications above)
+- UI: #D3D3D3, #F0F0F0, #A0A0A0, #808080, #404040, #FFFFFF
+- Centers: #FFD700
+
+File Format:
+- Source files provided as SVG with pixel-perfect rendering
+- Recommended export format: PNG at 1:1 pixel ratio
+- Maintain crisp edges and no anti-aliasing for authentic pixel art look
+
+Canvas Implementation Notes:
+- All sprites designed for integer pixel positioning
+- Tiles are designed to seamlessly connect when placed adjacent
+- Root components can be rotated and combined procedurally
+- Stem tiles can be stacked vertically for variable height plants
+- Color variations enable randomized garden appearances
+
+Animation Considerations:
+- Flowers can be swapped for bloom animations
+- Stem tiles can be revealed progressively for growth animation
+- Root components can be placed sequentially for root growth
+- Seed sprite can transform into stem base
+- All sprites maintain consistent pixel density for smooth animation
+
+Scaling Recommendations:
+- Base sprites work well at 1x, 2x, and 4x scaling
+- Maintain pixel-perfect scaling (avoid fractional scaling)
+- Consider implementing different sprite sets for significantly different zoom levels
+- Test readability at target canvas resolution
+
+Z-Layering Suggestions (back to front):
+1. Sky background
+2. Soil layer
+3. Root system components
+4. Grass layer
+5. Plant stems
+6. Flowers
+7. UI elements
+
+IMPLEMENTATION EXAMPLE
+---------------------
+To load and use sprites in HTML5 Canvas:
+
+1. Load all sprite images
+2. Create background by tiling sky, then soil, then grass
+3. Place seeds at desired locations
+4. Animate growth by:
+   - Adding root components underground
+   - Stacking stem tiles upward
+   - Placing flower sprite at stem top
+5. Position UI elements over scene
+
+Each sprite is designed to work independently while maintaining visual cohesion as part of the complete garden scene.
